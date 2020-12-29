@@ -24,7 +24,5 @@ This is a graphing calculator made with Raylib using C. It allows you to type in
 
 ## Building or testing
 - Clone the repo
-- If you're on Linux, type `./graphingCalc`
-- Else
-    - Download [Raylib](https://www.raylib.com/)
-    - Open a terminal in this directory, type `make` and an executable will be created.
+- Download [Raylib](https://www.raylib.com/)
+- Open a terminal in this directory, type `make` and an executable will be created.
