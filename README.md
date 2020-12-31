@@ -20,9 +20,12 @@ This is a graphing calculator made with Raylib using C. It allows you to type in
 - lo: log
 - p: pi
 - #: rand
-- scroll on x to increment or decrement
+- up/down arrow to increment/decrement x1
+- right/left arrow to increment/decrement x2
 
 ## Building or testing
-- Clone the repo
-- Download [Raylib](https://www.raylib.com/)
-- Open a terminal in this directory, type `make` and an executable will be created.
+- Go to
+- Or
+    - Clone the repo
+    - Download [Raylib](https://www.raylib.com/)
+    - Open a terminal in this directory, type `make` and an executable will be created.

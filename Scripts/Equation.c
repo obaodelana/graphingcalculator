@@ -242,7 +242,7 @@ void UseFunction(float val, float *on, char *functionLetters, char sign)
         newVal = sqrtf(val);
     // abs
     else if (!strcmp(functionLetters, "ab"))
-        newVal = abs(val);
+        newVal = fabsf(val);
     // log
     else if (!strcmp(functionLetters, "lo"))
         newVal = log10f(val);

@@ -7,6 +7,8 @@ int numberXBox = screenWidth / boxSize, numberYBox = screenHeight / boxSize;
 Vector2 startMousePos = (Vector2) {screenWidth / 2, screenHeight / 2};
 // Keeps track of changes in position made when panning
 Vector2 changeInPos = (Vector2) {0.0f, 0.0f};
+// Camera for panning
+Camera2D graphCam = {0};
 
 typedef struct Boundary
 {
@@ -14,44 +16,56 @@ typedef struct Boundary
     float minY, maxY;
 } Boundary;
 
-void DragGraph(Camera2D *cam);
+void UpdateDrawFrame(void);
+void DragGraph();
 void DrawGraphPaper(void);
 void DrawInfoText(void);
 
 int main()
 {
     InitWindow(screenWidth, screenHeight, "Raylib Graphing Calculator");
-    SetTargetFPS(60);
+    // Set up panning camera
+    graphCam = (Camera2D) {.target = startMousePos, .offset = startMousePos, .rotation = 0.0f, .zoom = 1.0f};
 
-    // Camera for panning
-    Camera2D graphCam = (Camera2D) {.target = startMousePos, .offset = startMousePos, .rotation = 0.0f, .zoom = 1.0f};
-
-    while(!WindowShouldClose())
-    {
-        TypeText();
-        ChangeTextValues();
-        DragGraph(&graphCam);
-
-        BeginDrawing();
-
-            ClearBackground(WHITE);
-
-            // Camera mode
-            BeginMode2D(graphCam);
-                DrawGraphPaper();
-                PlotGraph();
-            EndMode2D();
-
-            DrawInfoText();
-            DrawXs();
-            DrawTextbox();
-
-        EndDrawing();
-    }
+    // Web compilation
+    #if defined(PLATFORM_WEB)
+        emscripten_set_main_loop(UpdateDrawFrame, 60, 1);
+    #else
+    // Normal compilation
+        SetTargetFPS(60);
+        // Main game loop
+        while(!WindowShouldClose())
+        {
+            UpdateDrawFrame();
+        }
+    #endif
 
     CloseWindow();
 
     return 0;
+}
+
+void UpdateDrawFrame(void)
+{
+    TypeText();
+    ChangeTextValues();
+    DragGraph();
+
+    BeginDrawing();
+
+        ClearBackground(WHITE);
+
+        // Camera mode
+        BeginMode2D(graphCam);
+            DrawGraphPaper();
+            PlotGraph();
+        EndMode2D();
+
+        DrawInfoText();
+        DrawXs();
+        DrawTextbox();
+
+    EndDrawing();
 }
 
 void LimitGraph(Vector2 *vecs[], Boundary bounds[])
@@ -71,7 +85,7 @@ void LimitGraph(Vector2 *vecs[], Boundary bounds[])
     }
 }
 
-void DragGraph(Camera2D *cam)
+void DragGraph()
 {
     // When the left mouse button is clicked, keep track of it's position
     if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
@@ -85,11 +99,11 @@ void DragGraph(Camera2D *cam)
         // Change in position from when clicked to now
         Vector2 dir = (Vector2) {startMousePos.x - GetMousePosition().x, startMousePos.y - GetMousePosition().y};
         // Move camera to new position (dir)
-        cam->target = (Vector2) {dir.x + cam->target.x, dir.y + cam->target.y};
+        graphCam.target = (Vector2) {dir.x + graphCam.target.x, dir.y + graphCam.target.y};
         // Kepp track of change in position
         changeInPos = (Vector2) {changeInPos.x + dir.x, changeInPos.y + dir.y};
 
-        Vector2 *vecs[] = { &cam->target, &changeInPos, NULL };
+        Vector2 *vecs[] = { &graphCam.target, &changeInPos, NULL };
         // Boundary for camera and changeInPos
         Boundary bounds[] = {(Boundary) {-925.0f, 2000.0f, -1420.0f, 1988.0f}, (Boundary) {-1475.0f, 1450.0f, -1720.0, 1688.0f}};
         LimitGraph(vecs, bounds);
@@ -102,7 +116,7 @@ void DragGraph(Camera2D *cam)
     if (IsMouseButtonPressed(MOUSE_RIGHT_BUTTON))
     {
         changeInPos = (Vector2) {0.0f, 0.0f};
-        cam->target = (Vector2) {screenWidth / 2, screenHeight / 2};
+        graphCam.target = (Vector2) {screenWidth / 2, screenHeight / 2};
     }
 }
 

@@ -15,42 +15,37 @@ void LimitValue(int *value, int min, int max)
         *value = max;
 
     // Update graph
-    GetYValues();
+    SendEquation();
 }
 
 void ChangeTextValues(void)
 {
-    // Box of text
-    Rectangle value1 = (Rectangle) {.x = text1.x, .y = text1.y, 50, 50};
-    Rectangle value2 = (Rectangle) {.x = text2.x, .y = text2.y, 50, 50};
-    // Box of pointer
-    Rectangle mouse = (Rectangle) {.x = GetMousePosition().x, .y = GetMousePosition().y, 10, 10};
-
-    int scrollWheel = GetMouseWheelMove();
-
-    // If mouse colliding with x1 and scroll wheel is scrolled
-    if (CheckCollisionRecs(value1, mouse) && scrollWheel)
+    int keyPressed = GetKeyPressed();
+    // If a key is pressed
+    if (keyPressed == KEY_UP || keyPressed == KEY_DOWN || keyPressed == KEY_RIGHT || keyPressed == KEY_LEFT)
     {
-        // Increase x value
-        x1 += scrollWheel;
-        
+        // Up arrow
+        if (keyPressed == KEY_UP)
+            x1++;
+        // Down arrow
+        else if (keyPressed == KEY_DOWN)
+            x1--;
+        // Right arrow
+        else if (keyPressed == KEY_RIGHT)
+            x2++;
+        // Left arrow
+        else if (keyPressed == KEY_LEFT)
+            x2--;
+
         // Make sure x1 is less than x2
         if (x1 >= x2)
             x1 = x2 - 1;
-        // Limit its value
-        LimitValue(&x1, -50, 50);
-    }
-
-    // If mouse colliding with x2 and scroll wheel is scrolled
-    else if (CheckCollisionRecs(value2, mouse) && scrollWheel)
-    {
-        // Increase x value
-        x2 += scrollWheel;
-
         // Make sure x2 is greater than x1
-        if (x2 <= x1)
+        else if (x2 <= x1)
             x2 = x1 + 1;
-        // Limit its value
+
+        // Limit their values
+        LimitValue(&x1, -50, 50);
         LimitValue(&x2, -50, 50);
     }
 }
@@ -58,6 +53,6 @@ void ChangeTextValues(void)
 // Draw text
 void DrawXs(void)
 {
-    DrawText(TextFormat("x1: %i", x1), text1.x, text1.y, 20, GRAY);
-    DrawText(TextFormat("x2: %i", x2), text2.x, text2.y, 20, GRAY);
+    DrawText(TextFormat("x1: %i\nUp/down arrows", x1), text1.x, text1.y, 20, GRAY);
+    DrawText(TextFormat("x2: %i\nLeft/right arrows", x2), text2.x, text2.y, 20, GRAY);
 }

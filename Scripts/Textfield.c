@@ -1,7 +1,7 @@
 #include "../Headers/Global.h"
 
 const int minChars = 7, maxChars = 48;
-// Characters that are not allowd to be typed
+// Characters that are not allowed to be typed
 const char *forbiddenChars = "@$%&_|=`~QqWwERYyUuPDdFfGgHhJjKkLZzXvVBMmNTASIiCO,.?'\";:\\{[}](<> ";
 // Characters that start functions
 const char *startLetters = "al";
@@ -14,8 +14,6 @@ int bracketsOpened = 0;
 
 // Position of equation box
 Rectangle equationBox = (Rectangle) {screenWidth / 2 - (850 / 2), screenHeight / 6, 850, 80};
-
-void SendEquation(void);
 
 // Number of characters to remove
 int CharactersToRemove(void)
@@ -79,8 +77,8 @@ void TypeText(void)
 {
     // String length
     int equationLength = strlen(equation);
-    // Key pressed
-    char key = (char) GetKeyPressed();
+    // Character pressed pressed
+    char key = GetCharPressed();
     // Is last character a space
     lastIsSpace = equation[equationLength - 1] == ' ';
 

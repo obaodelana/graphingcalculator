@@ -2,6 +2,9 @@
 #include <string.h>
 #include <ctype.h>
 #include "raylib.h"
+#if defined(PLATFORM_WEB)
+    #include <emscripten/emscripten.h>
+#endif
 
 #define screenWidth 1100
 #define screenHeight 600
@@ -9,12 +12,13 @@
 // Size of graph boxes
 #define boxSize 10
 
-// minimum x value to maximum x value
+// minimum x value, maximum x value
 extern int x1, x2;
 
 // Textfield class
 void TypeText(void);
 void DrawTextbox(void);
+void SendEquation(void);
 
 // Equation class
 void StripEquation(char *equationText);
