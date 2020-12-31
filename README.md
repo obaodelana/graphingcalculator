@@ -24,7 +24,7 @@ This is a graphing calculator made with Raylib using C. It allows you to type in
 - right/left arrow to increment/decrement x2
 
 ## Building or testing
-- [Play online](https://obaodelana.github.io/graphingcalculator/Web%20Build/graphingCalculator.html)
+- [Try it out online](https://obaodelana.github.io/graphingcalculator/Web%20Build/graphingCalculator.html)
 - Or
     - Clone the repo
     - Download [Raylib](https://www.raylib.com/)
