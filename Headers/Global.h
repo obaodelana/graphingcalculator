@@ -12,8 +12,10 @@
 // Size of graph boxes
 #define boxSize 10
 
-// minimum x value, maximum x value
-extern int x1, x2;
+// minimum x value
+#define x1 -50
+// maximum x value
+#define x2 50
 
 // Textfield class
 void TypeText(void);

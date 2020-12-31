@@ -48,7 +48,6 @@ int main()
 void UpdateDrawFrame(void)
 {
     TypeText();
-    ChangeTextValues();
     DragGraph();
 
     BeginDrawing();
@@ -62,7 +61,6 @@ void UpdateDrawFrame(void)
         EndMode2D();
 
         DrawInfoText();
-        DrawXs();
         DrawTextbox();
 
     EndDrawing();

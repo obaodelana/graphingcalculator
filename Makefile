@@ -380,7 +380,7 @@ ifeq ($(PLATFORM),PLATFORM_WEB)
 endif
 
 # Define all source files required
-PROJECT_SOURCE_FILES ?= Scripts/Equation.c Scripts/Graph.c Scripts/main.c Scripts/Textfield.c Scripts/XRange.c
+PROJECT_SOURCE_FILES ?= Scripts/Equation.c Scripts/Graph.c Scripts/main.c Scripts/Textfield.c
 
 # Define all object files from source files
 OBJS = $(patsubst %.c, %.o, $(PROJECT_SOURCE_FILES))
