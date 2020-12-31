@@ -20,8 +20,6 @@ This is a graphing calculator made with Raylib using C. It allows you to type in
 - lo: log
 - p: pi
 - #: rand
-- up/down arrow to increment/decrement x1
-- right/left arrow to increment/decrement x2
 
 ## Building or testing
 - [Try it out online](https://obaodelana.github.io/graphingcalculator/Web%20Build/graphingCalculator.html)
