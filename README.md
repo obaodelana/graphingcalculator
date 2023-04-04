@@ -1,6 +1,8 @@
 # Graphing calculator
 This is a graphing calculator made with Raylib using C. It allows you to type in an equation and it will display a graph of it. I did it to improve my C skills and it was a lot of fun. I'll add more things as I learn more.
 
+![image](https://user-images.githubusercontent.com/35340328/229946561-1a42d824-e7a2-4964-a51d-a15429537a20.png)
+
 ## Math features
 - Basic arithmetics (+, -, /, *)
 - Basic Trig functions (sin, cos, tan, asin, acos, atan)
